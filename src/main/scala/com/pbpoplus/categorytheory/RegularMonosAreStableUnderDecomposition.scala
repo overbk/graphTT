@@ -1,0 +1,3 @@
+package com.pbpoplus.categorytheory
+
+trait RegularMonosAreStableUnderDecomposition

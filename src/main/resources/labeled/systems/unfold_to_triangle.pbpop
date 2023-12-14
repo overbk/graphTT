@@ -1,0 +1,30 @@
+/* Example 5.5 of 
+   Termination of Graph Transformation Systems 
+   Using Weighted Subgraph Counting
+ */
+
+=== rho ===
+L  { x:0 -XY1:0-> y:0 
+     y:0 -YZ:0-> <-ZY:0- z:0 }
+L' { x:0 -XY1:0-> y:0 
+     y:0 -YZ:0-> <-ZY:0- z:0
+     x:0 -XY2:0-> y:0
+     x:0 <-YX:0- y:0
+     x:0 -XX:0-> x:0
+     y:0 -YY:0-> y:0
+     x:0 -XC:0-> <-CX:0- c:0
+     y:0 -YC:0-> <-CY:0- c:0
+     c:0 -CC:0-> c:0 }
+K  { x:0 -XY1:0-> y:0 }
+K' { x:0 -XY1:0-> y:0 
+     x:0 -XY2:0-> y:0
+     x:0 <-YX:0- y:0
+     x:0 -XX:0-> x:0
+     y:0 -YY:0-> y:0
+     x:0 -XC:0-> <-CX:0- c:0
+     y:0 -YC:0-> <-CY:0- c:0
+     c:0 -CC:0-> c:0 }
+R  { x:0 -XY1:0-> y:0 
+     y:0 -YW:0-> w:0
+     w:0 -WX:0-> x:0 }
+     

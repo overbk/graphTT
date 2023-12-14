@@ -1,0 +1,28 @@
+/* Example 5.7 of 
+   Termination of Graph Transformation Systems 
+   Using Weighted Subgraph Counting
+ */
+ 
+=== rho ===
+L  { n:0 -NN1:0-> n:0 }
+L' { n:0 -NN1:0-> n:0
+     n:0 -NN2:0-> n:0
+     n:0 -NC:0-> <-CN:0- c:0
+     c:0 -CC:0-> c:0
+     w.x:0 -WY.XZ:0-> <-YW.ZX:0- y.z:0 }
+K  { n:0 }
+K' { n:0 -NN2:0-> n:0
+     n:0 -NC:0-> <-CN:0- c:0
+     c:0 -CC:0-> c:0
+     w:0 -WY:0-> <-YW:0- y:0
+     x:0 -XZ:0-> <-ZX:0- z:0 }
+R  { n:0 }
+
+=== tau ===
+L  { x:0 }
+L' { x:0 -XX:0-> x:0
+     x:0 -XC:0-> <-CX:0- c:0
+     c:0 -CC:0-> c:0 }
+K  { }
+K' { c:0 -CC:0-> c:0 }
+R  { }
