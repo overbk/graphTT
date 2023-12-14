@@ -1,4 +1,4 @@
-## GraphTT
+## graphTT
 
 This repository contains a Scala implementation of a termination method for PBPO+ graph transformation systems, described in a recent research paper:
 
