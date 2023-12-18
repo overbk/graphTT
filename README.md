@@ -2,7 +2,7 @@
 
 This repository contains a Scala implementation of a termination method for PBPO+ graph transformation systems, described in a recent research paper:
 
-R. Overbeek & J. Endrullis. Termination of Graph Transformation Systems Using Weighted Subgraph Counting. arXiv, 2023. [url](todo)
+R. Overbeek & J. Endrullis. Termination of Graph Transformation Systems Using Weighted Subgraph Counting. arXiv, 2023. [url](https://arxiv.org/abs/2303.07812)
 
 ### Context
 
