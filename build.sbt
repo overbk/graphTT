@@ -4,10 +4,16 @@ lazy val root = project
   .in(file("."))
   .settings(
     name := "graph-termination-tool",
-    scalaVersion := scala3Version,
+    scalaVersion := scala3Version
   )
 
-scalacOptions := Seq("-Werror", "-Wunused:imports", "-unchecked", "-deprecation", "-Vprofile")
+scalacOptions := Seq(
+  "-Werror",
+  "-Wunused:imports",
+  "-unchecked",
+  "-deprecation",
+  "-Vprofile"
+)
 
 libraryDependencies ++= Seq(
   "org.typelevel" %% "cats-core" % "2.8.0",
