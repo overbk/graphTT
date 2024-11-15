@@ -3,14 +3,17 @@
   "extends": [
     "config:recommended"
   ],
+  "schedule": [
+    "before 5am every saturday"
+  ],
   "packageRules": [
     {
       "updateTypes": ["minor", "patch"],
-      "groupName": "Minor Dependency Updates"
+      "groupName": "minor dependencies"
     },
     {
       "packageNames": ["org.scala-lang:**"],
-      "groupName": "Scala Updates",
+      "groupName": "scala dependencies",
       "updateTypes": ["minor", "patch", "major"]
     }
   ]
