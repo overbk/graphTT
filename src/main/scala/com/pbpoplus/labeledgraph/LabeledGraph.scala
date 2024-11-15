@@ -221,11 +221,10 @@ final case class LabeledGraph[V, E, LV, LE](
       val that = targetGraph.VertexOps
       def maybeCompatible: V => V2 => Boolean = v => w =>
            v.label == that(w).label
-        && (v.incomingEdges.toMultiset.map(lE) subsetOf 
-              that(w).incomingEdges.toMultiset.map(targetGraph.lE))
-        && (v.outgoingEdges.toMultiset.map(lE) subsetOf
-              that(w).outgoingEdges.toMultiset.map(targetGraph.lE))
-        && (v.loops.toMultiset.map(lE) subsetOf that(w).loops.toMultiset.map(targetGraph.lE))
+        && v.incomingEdges.toMultiset.map(lE)
+             .subsetOf(that(w).incomingEdges.toMultiset.map(targetGraph.lE))
+        && v.outgoingEdges.toMultiset.map(lE).subsetOf(that(w).outgoingEdges.toMultiset.map(targetGraph.lE))
+        && v.loops.toMultiset.map(lE).subsetOf(that(w).loops.toMultiset.map(targetGraph.lE))
 
       generateHomomorphisms(maybeCompatible, targetGraph, true)
 

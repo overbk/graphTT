@@ -7,7 +7,7 @@ lazy val root = project
     scalaVersion := scala3Version,
   )
 
-scalacOptions := Seq("-unchecked", "-deprecation", "-Vprofile") //"-Werror"
+scalacOptions := Seq("-Werror", "-unchecked", "-deprecation", "-Vprofile")
 
 libraryDependencies += "org.typelevel" %% "cats-core" % "2.8.0"
 

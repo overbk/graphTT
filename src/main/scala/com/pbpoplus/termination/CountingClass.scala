@@ -14,12 +14,12 @@ object CountingClass:
       case _ => throw Exception(s"could not parse ${s.trim}")
       
 enum CountingClass:
-  def predicate[A](implicit category: TerminationCategory[_, A]): A => Boolean = this match
+  def predicate[A](implicit category: TerminationCategory[?, A]): A => Boolean = this match
     case RegularMono => category.isRegularMonic
     case Mono => category.isMonic
     case Homomorphism => { (_: A) => true }
     
-  def secondFactor[A](implicit category: TerminationCategory[_, A]): A => A = this match
+  def secondFactor[A](implicit category: TerminationCategory[?, A]): A => A = this match
     case RegularMono => category.image
     case Mono => f => category.regularEpiMonoFactorization(f)._2
     case Homomorphism => identity
