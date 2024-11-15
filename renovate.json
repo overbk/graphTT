@@ -2,5 +2,16 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "packageRules": [
+    {
+      "packageNames": ["scala-library"],
+      "groupName": "Scala Updates",
+      "updateTypes": ["minor", "patch", "major"]
+    },
+    {
+      "updateTypes": ["minor", "patch"],
+      "groupName": "Minor Dependency Updates"
+    }
   ]
 }
