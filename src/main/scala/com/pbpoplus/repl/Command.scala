@@ -1,11 +1,11 @@
 package com.pbpoplus.repl
 
-import scala.util.Try
-import scala.quoted.Type
+import com.pbpoplus.termination.CountingClass
+import com.pbpoplus.termination.CountingClass._
+
 import scala.util.Failure
 import scala.util.Success
-import com.pbpoplus.termination.CountingClass
-import com.pbpoplus.termination.CountingClass.*
+import scala.util.Try
 
 sealed trait Command:
   val stringRepresentation: String
@@ -17,13 +17,13 @@ case object Help extends Command:
   val stringRepresentation = "help"
   val description = "help : print all available commands"
   type ReturnType = Unit
-  def validateArguments(args: List[String]) = Right(())
+  def validateArguments(args: List[String]): Either[String, ReturnType] = Right(())
 
 case object Exit extends Command:
   val stringRepresentation = "exit"
   val description = "exit : exit the program"
   type ReturnType = Unit
-  def validateArguments(args: List[String]) = Right(())
+  def validateArguments(args: List[String]): Either[String, ReturnType] = Right(())
 
 case object Inspect extends Command:
   val stringRepresentation = "inspect"
@@ -39,7 +39,7 @@ case object Inspect extends Command:
 
 case object Prove extends Command:
   val stringRepresentation = "select"
-  val description = s"$stringRepresentation [n] : select system n for termination proving"
+  val description: String = s"$stringRepresentation [n] : select system n for termination proving"
   type ReturnType = Int
   def validateArguments(args: List[String]): Either[String, Int] =
     if args.length != 1 then
@@ -51,14 +51,14 @@ case object Prove extends Command:
 
 case object Back extends Command:
   val stringRepresentation = "back"
-  val description = s"$stringRepresentation : return to system selection mode"
+  val description: String = s"$stringRepresentation : return to system selection mode"
   type ReturnType = Unit
   def validateArguments(args: List[String]): Either[String, Unit] = Right(())
 
 case object Use extends Command:
   type returnType = Set[(Int, Int, CountingClass)]
   val stringRepresentation = "use"
-  val description = s"""$stringRepresentation [i w c]+ :
+  val description: String = s"""$stringRepresentation [i w c]+ :
     |    use tile i with weight w, and count morphisms of class c, where:
     |      - i and w are integers (and w is positive), and 
     |      - c is a character (r: regular monos, m: monos, h: homomorphisms)
@@ -89,13 +89,13 @@ case object Use extends Command:
 
 case object Systems extends Command:
   val stringRepresentation = "systems"
-  val description = s"$stringRepresentation : list the available systems"
+  val description: String = s"$stringRepresentation : list the available systems"
   type ReturnType = Unit
   def validateArguments(args: List[String]): Either[String, Unit] = Right(())
 
 case object Tiles extends Command:
   val stringRepresentation = "tiles"
-  val description = s"$stringRepresentation : list the available tiles"
+  val description: String = s"$stringRepresentation : list the available tiles"
   type ReturnType = Unit
   def validateArguments(args: List[String]): Either[String, Unit] = Right(())
 

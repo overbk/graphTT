@@ -8,20 +8,20 @@ trait Category[O, A]:
   def homSet(from: O, to: O): Set[A]
   
   implicit class ArrowOps(g: A):
-    infix def o(f: A) = after(g, f)
+    infix def o(f: A): A = after(g, f)
   end ArrowOps
 
-  def areCompatible(g: A, f: A) = domain(g) == codomain(f)
-  def areOpposite(f: A, g: A) = areCompatible(f, g) && areCompatible(g, f)
-  def areParallel(f: A, g: A) = domain(f) == domain(g) && codomain(f) == codomain(g)
+  def areCompatible(g: A, f: A): Boolean = domain(g) == codomain(f)
+  def areOpposite(f: A, g: A): Boolean = areCompatible(f, g) && areCompatible(g, f)
+  def areParallel(f: A, g: A): Boolean = domain(f) == domain(g) && codomain(f) == codomain(g)
 
-  def isLeftInverseFor(g: A, f: A) = areOpposite(g, f) && (g o f) == identityArrow(domain(f))
+  def isLeftInverseFor(g: A, f: A): Boolean = areOpposite(g, f) && (g o f) == identityArrow(domain(f))
   def leftInversesFor(f: A): Set[A] = homSet(codomain(f), domain(f)).filter(isLeftInverseFor(_, f))
-  def isRightInverseFor(f: A, g: A) =  
+  def isRightInverseFor(f: A, g: A): Boolean =  
     areOpposite(f, g) && (g o f) == identityArrow(domain(f))
   def rightInversesFor(f: A): Set[A] = 
     homSet(codomain(f), domain(f)).filter(isRightInverseFor(_, f))
-  def areInverses(f: A, g: A) = areOpposite(f, g) && (f o g) == identityArrow(domain(g)) &&
+  def areInverses(f: A, g: A): Boolean = areOpposite(f, g) && (f o g) == identityArrow(domain(g)) &&
     (g o f) == identityArrow(domain(f))
   def inverseOf(f: A): Option[A] = // if one exists, it exists uniquely
     homSet(codomain(f), domain(f)).find(areInverses(f, _))

@@ -1,6 +1,5 @@
 package com.pbpoplus.util
 
-import scala.util.Random
 import cats.syntax.all._
 
 extension [T](x: T)

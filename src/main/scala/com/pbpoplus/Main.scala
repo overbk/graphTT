@@ -1,7 +1,8 @@
 package com.pbpoplus
 
-import labeledgraph.LabeledGraph
-import labeledgraph.LabeledGraphMorphism
+import com.pbpoplus.termination.CountingClass
+import com.pbpoplus.util.FreshSetProducer
+
 import labeledgraph.LabeledGraphCategory
 import rewriting.PbpoPlusRule
 import categorytheory.TerminationCategory
@@ -11,9 +12,6 @@ import repl._
 import repl.Util._
 import parsing.Util.parse
 import parsing.LabeledPbpoParser
-import com.pbpoplus.util.FreshSetProducer
-import com.pbpoplus.util.mapTo
-import com.pbpoplus.termination.CountingClass
 
 @main def main: Unit =
   val labeledGraphCategory = LabeledGraphCategory[String, String, String, String]()

@@ -7,7 +7,7 @@ object Multiset:
   def apply[T](s: Set[T]): Multiset[T] = Multiset(s.map(_ -> 1).toMap)
 
 case class Multiset[T] (private val m: Map[T, Int]):
-  lazy val size = m.toList.foldLeft(0)(_ + _._2)
+  lazy val size: Int = m.toList.foldLeft(0)(_ + _._2)
 
   val toMap = m
 

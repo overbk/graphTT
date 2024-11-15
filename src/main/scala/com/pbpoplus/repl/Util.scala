@@ -1,6 +1,5 @@
 package com.pbpoplus.repl
 
-import com.pbpoplus.repl.Command
 import java.io.File
 
 object Util:
@@ -20,7 +19,7 @@ object Util:
 
       Right(resources)
 
-  def printResources(indexToResource: Map[Int, Resource], resourceType: String) = 
+  def printResources(indexToResource: Map[Int, Resource], resourceType: String): Unit = 
     println(s">> The following ${resourceType}s were loaded:")
     indexToResource.toList.sortBy(_._1).foreach{ case (i, Resource(name, content)) => 
       println(s"  (${i}) $name")

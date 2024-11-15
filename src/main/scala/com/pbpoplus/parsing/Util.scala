@@ -1,8 +1,6 @@
 package com.pbpoplus.parsing
 
-import scala.util.parsing.combinator.*
-import scala.util.parsing.combinator.Parsers
-import com.pbpoplus.rewriting.RewriteRule
+import scala.util.parsing.combinator._
 
 object Util:
   def parse[X](parsers: RegexParsers, parser: RegexParsers#Parser[X], input: String): X =

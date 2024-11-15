@@ -1,7 +1,8 @@
 package com.pbpoplus.labeledgraph
 
-import com.pbpoplus.labeledgraph.{LabeledGraph, LabeledGraphMorphism}
-import com.pbpoplus.categorytheory.{Cospan, Span, Topos}
+import com.pbpoplus.categorytheory.Cospan
+import com.pbpoplus.categorytheory.Span
+import com.pbpoplus.categorytheory.Topos
 import com.pbpoplus.util._
 
 final case class LabeledGraphCategory[V, E, LV, LE]()(
