@@ -12,7 +12,7 @@ final case class RuleReport[O, A](
   ruleIsProvablyDecreasing: Boolean,
   ruleIsProvablyNonincreasing: Boolean
 ):
-  override def toString = 
+  override def toString: String = 
     val slideResult = 
       if slidingIsSuccessful then "SUCCESSFUL" else "UNSUCCESSFUL"
     val measureStatus =

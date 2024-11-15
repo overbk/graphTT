@@ -2,9 +2,8 @@ package parsing
 
 import com.pbpoplus.labeledgraph.LabeledGraph
 import com.pbpoplus.labeledgraph.LabeledGraphMorphism
-import com.pbpoplus.rewriting.RewriteRule
 import com.pbpoplus.parsing.LabeledGraphParser
-import com.pbpoplus.labeledgraph.LabeledGraphMorphism
+import com.pbpoplus.rewriting.RewriteRule
 import com.pbpoplus.util.mapTo
 
 private type LGraph = LabeledGraph[String, String, String, String]

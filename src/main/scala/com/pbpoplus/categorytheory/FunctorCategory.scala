@@ -1,6 +1,6 @@
 package com.pbpoplus.categorytheory
 
-import com.pbpoplus.util._
+
 
 trait FunctorCategory[O1, A1, O2, A2](source: Category[O1, A1], target: Category[O2, A2])
   extends Category[Functor[O1, A1, O2, A2], NaturalTransformation[O1, A1, O2, A2]]:

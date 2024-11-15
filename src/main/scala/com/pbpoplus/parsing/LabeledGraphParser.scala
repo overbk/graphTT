@@ -1,8 +1,9 @@
 package com.pbpoplus.parsing
 
-import scala.util.parsing.combinator.*
-import scala.util.matching.Regex
 import com.pbpoplus.labeledgraph.LabeledGraph
+
+import scala.util.matching.Regex
+import scala.util.parsing.combinator._
 
 private sealed trait LabeledEdge:
   def id: String

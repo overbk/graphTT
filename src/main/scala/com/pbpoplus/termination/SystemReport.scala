@@ -12,7 +12,7 @@ final case class SystemReport[O, A] (
 ):
   val ruleNames = system.keys.toSet
 
-  override def toString = 
+  override def toString: String = 
     val ruleReports = toRuleReport.map((rule, report) => 
       report.toString
     ).toList.mkString("\n")

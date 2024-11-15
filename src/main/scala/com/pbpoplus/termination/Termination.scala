@@ -1,7 +1,9 @@
 package com.pbpoplus.termination
 
+import com.pbpoplus.categorytheory.Cospan
+import com.pbpoplus.categorytheory.Span
+import com.pbpoplus.categorytheory.TerminationCategory
 import com.pbpoplus.rewriting.PbpoPlusRule
-import com.pbpoplus.categorytheory.{Span, Cospan, TerminationCategory}
 import com.pbpoplus.util._
 
 object Termination:
@@ -10,7 +12,7 @@ object Termination:
     rho: PbpoPlusRule[O, A], 
     countingClass: CountingClass
   )(implicit category: TerminationCategory[O, A]): Set[A] =
-    import category.{codomain, pullback, rightInversesFor, image, ArrowOps}
+    import category.{codomain, pullback, rightInversesFor, ArrowOps}
     require(codomain(tiling) == rho.R1.get)
 
     /**

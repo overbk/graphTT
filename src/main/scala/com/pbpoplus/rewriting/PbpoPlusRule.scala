@@ -1,9 +1,10 @@
 package com.pbpoplus.rewriting
 
+import com.pbpoplus.categorytheory.Category
+import com.pbpoplus.categorytheory.Cospan
+import com.pbpoplus.categorytheory.Span
+
 import scala.annotation.targetName
-import com.pbpoplus.categorytheory.{Category, Span, Cospan}
-import com.pbpoplus.labeledgraph.{LabeledGraph, LabeledGraphMorphism, LabeledGraphCategory}
-import com.pbpoplus.util.FreshSetProducer
 
 final case class PbpoPlusRule[O, A](l: A, r: A, l1: A, tL: A, tK: A)
   (implicit category: Category[O, A]) extends RewriteRule[O, A]:
@@ -13,11 +14,11 @@ final case class PbpoPlusRule[O, A](l: A, r: A, l1: A, tL: A, tK: A)
   require(isPullbackFor(Span(l, tK), Cospan(tL, l1)), 
     "the rewrite rule must contain a pullback square")
 
-  val L = codomain(l)
-  val K = domain(l)
-  val R = codomain(r)
-  val L1 = codomain(l1)
-  val K1 = domain(l1)
+  val L: O = codomain(l)
+  val K: O = domain(l)
+  val R: O = codomain(r)
+  val L1: O = codomain(l1)
+  val K1: O = domain(l1)
 
   private lazy val po: Option[Cospan[A]] = maybePushout(Span(tK, r))
   lazy val r1: Option[A] = po.map(_.left)
