@@ -27,5 +27,7 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: 'sbt'
+    - name: Run scalafix
+      run: sbt "scalafixAll --check"
     - name: Run tests
       run: sbt test
