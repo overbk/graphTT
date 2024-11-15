@@ -6,23 +6,28 @@ trait Category[O, A]:
   def identityArrow(o: O): A
   def after(g: A, f: A): A
   def homSet(from: O, to: O): Set[A]
-  
+
   implicit class ArrowOps(g: A):
     infix def o(f: A): A = after(g, f)
   end ArrowOps
 
   def areCompatible(g: A, f: A): Boolean = domain(g) == codomain(f)
-  def areOpposite(f: A, g: A): Boolean = areCompatible(f, g) && areCompatible(g, f)
-  def areParallel(f: A, g: A): Boolean = domain(f) == domain(g) && codomain(f) == codomain(g)
+  def areOpposite(f: A, g: A): Boolean =
+    areCompatible(f, g) && areCompatible(g, f)
+  def areParallel(f: A, g: A): Boolean =
+    domain(f) == domain(g) && codomain(f) == codomain(g)
 
-  def isLeftInverseFor(g: A, f: A): Boolean = areOpposite(g, f) && (g o f) == identityArrow(domain(f))
-  def leftInversesFor(f: A): Set[A] = homSet(codomain(f), domain(f)).filter(isLeftInverseFor(_, f))
-  def isRightInverseFor(f: A, g: A): Boolean =  
+  def isLeftInverseFor(g: A, f: A): Boolean =
+    areOpposite(g, f) && (g o f) == identityArrow(domain(f))
+  def leftInversesFor(f: A): Set[A] =
+    homSet(codomain(f), domain(f)).filter(isLeftInverseFor(_, f))
+  def isRightInverseFor(f: A, g: A): Boolean =
     areOpposite(f, g) && (g o f) == identityArrow(domain(f))
-  def rightInversesFor(f: A): Set[A] = 
+  def rightInversesFor(f: A): Set[A] =
     homSet(codomain(f), domain(f)).filter(isRightInverseFor(_, f))
-  def areInverses(f: A, g: A): Boolean = areOpposite(f, g) && (f o g) == identityArrow(domain(g)) &&
-    (g o f) == identityArrow(domain(f))
+  def areInverses(f: A, g: A): Boolean =
+    areOpposite(f, g) && (f o g) == identityArrow(domain(g)) &&
+      (g o f) == identityArrow(domain(f))
   def inverseOf(f: A): Option[A] = // if one exists, it exists uniquely
     homSet(codomain(f), domain(f)).find(areInverses(f, _))
 
@@ -60,18 +65,24 @@ trait Category[O, A]:
 
     val rootIsos: Set[A] = isoSet(from.root: O, to.root: O)
 
-    rootIsos.filter(i => from.left == (to.left o i) && from.right == (to.right o i))
-  
-  def areIsomorphic(sp1: Span[A], sp2: Span[A]): Boolean = isoSet(sp1, sp2).nonEmpty
+    rootIsos.filter(i =>
+      from.left == (to.left o i) && from.right == (to.right o i)
+    )
+
+  def areIsomorphic(sp1: Span[A], sp2: Span[A]): Boolean =
+    isoSet(sp1, sp2).nonEmpty
 
   def isoSet(from: Cospan[A], to: Cospan[A]): Set[A] =
     require(codomain(from.left) == codomain(to.left))
     require(codomain(from.right) == codomain(to.right))
 
     val rootIsos = isoSet(from.sink, to.sink)
-    rootIsos.filter(i => (i o from.left) == to.left && (i o from.right) == to.right)
-  
-  def areIsomorphic(co1: Cospan[A], co2: Cospan[A]): Boolean = isoSet(co1, co2).nonEmpty
+    rootIsos.filter(i =>
+      (i o from.left) == to.left && (i o from.right) == to.right
+    )
+
+  def areIsomorphic(co1: Cospan[A], co2: Cospan[A]): Boolean =
+    isoSet(co1, co2).nonEmpty
 
   ///////////////////////////////////////////////////////////////////////////
   // Commuting squares.
@@ -83,7 +94,7 @@ trait Category[O, A]:
 
   def maybePullback(cospan: Cospan[A]): Option[Span[A]]
 
-  def isPullbackFor(span: Span[A], cospan: Cospan[A]): Boolean = 
+  def isPullbackFor(span: Span[A], cospan: Cospan[A]): Boolean =
     val pb = maybePullback(cospan)
     pb.isDefined && areIsomorphic(span, pb.get)
 

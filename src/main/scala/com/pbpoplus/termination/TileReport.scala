@@ -1,19 +1,19 @@
 package com.pbpoplus.termination
 
 final case class TileReport[O, A](
-  tileInfo: WeightedTileInfo[O, A],
-  slideReport: TileSlideReport[O, A],
-  validTilingsIsoInR: Set[A],
-  aLargestValidTilingOfL: Set[A]
+    tileInfo: WeightedTileInfo[O, A],
+    slideReport: TileSlideReport[O, A],
+    validTilingsIsoInR: Set[A],
+    aLargestValidTilingOfL: Set[A]
 ):
   import tileInfo._
 
   val counting: String = countingClass match
-    case CountingClass.RegularMono => "REGULAR MONOS only"
-    case CountingClass.Mono => "MONOS only"
+    case CountingClass.RegularMono  => "REGULAR MONOS only"
+    case CountingClass.Mono         => "MONOS only"
     case CountingClass.Homomorphism => "all HOMOMORPHISMS"
-  
-  override def toString: String = 
+
+  override def toString: String =
     s"""
     |~~~ Tile $name with weight $weight, and counting $counting
     |  $stringRepresentation

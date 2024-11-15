@@ -6,13 +6,19 @@ import com.pbpoplus.categorytheory.Span
 
 import scala.annotation.targetName
 
-final case class PbpoPlusRule[O, A](l: A, r: A, l1: A, tL: A, tK: A)
-  (implicit category: Category[O, A]) extends RewriteRule[O, A]:
+final case class PbpoPlusRule[O, A](l: A, r: A, l1: A, tL: A, tK: A)(implicit
+    category: Category[O, A]
+) extends RewriteRule[O, A]:
   import category._
-  
-  require(domain(l) == domain(r), "the domain of morphisms l and r must coincide")
-  require(isPullbackFor(Span(l, tK), Cospan(tL, l1)), 
-    "the rewrite rule must contain a pullback square")
+
+  require(
+    domain(l) == domain(r),
+    "the domain of morphisms l and r must coincide"
+  )
+  require(
+    isPullbackFor(Span(l, tK), Cospan(tL, l1)),
+    "the rewrite rule must contain a pullback square"
+  )
 
   val L: O = codomain(l)
   val K: O = domain(l)
@@ -26,7 +32,7 @@ final case class PbpoPlusRule[O, A](l: A, r: A, l1: A, tL: A, tK: A)
   lazy val R1: Option[O] = r1.map(codomain)
 
   @targetName("applyToObject")
-  def apply(host: O): Set[(O, (A, A))] = 
+  def apply(host: O): Set[(O, (A, A))] =
     for {
       alpha <- homSet(host, L1)
       (gR, m) <- adherenceInducedStep(alpha)
@@ -38,13 +44,13 @@ final case class PbpoPlusRule[O, A](l: A, r: A, l1: A, tL: A, tK: A)
       L >--m-> G_L <--gL--- G_K <--u---< K0 >--u--> G_K
       |         |            |           |           |
       =   pb0  alpha  pb1   u1    pb2   iso          |
-      |         v            v           |           |      
+      |         v            v           |           |
       L >-tL--> L' <--l1--- K' <--tK---< K    po     gR
                                          |           |
                                          r           |
                                          v           v
                                          R >---w--> G_R
-  */
+   */
 
   def adherenceInducedStep(alpha: A): Option[(O, A)] =
     require(codomain(alpha) == L1, "the codomain of alpha needs to be L'")
@@ -62,7 +68,7 @@ final case class PbpoPlusRule[O, A](l: A, r: A, l1: A, tL: A, tK: A)
     } yield (gR, m)
 
   def matchInducedStep(m: A): Set[(O, A)] =
-    require(domain(m) == L,  "the domain of m needs to be L")
+    require(domain(m) == L, "the domain of m needs to be L")
     val gL = codomain(m)
     for {
       alpha <- homSet(gL, L1)

@@ -2,7 +2,10 @@ package com.pbpoplus.categorytheory
 
 import scala.annotation.targetName
 
-final case class Functor[O1, A1, O2, A2](objectMap: Map[O1, O2], arrowMap: Map[A1, A2]):
+final case class Functor[O1, A1, O2, A2](
+    objectMap: Map[O1, O2],
+    arrowMap: Map[A1, A2]
+):
 
   @targetName("applyObject")
   def apply(o: O1): O2 = objectMap(o)

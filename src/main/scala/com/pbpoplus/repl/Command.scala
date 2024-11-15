@@ -17,13 +17,19 @@ case object Help extends Command:
   val stringRepresentation = "help"
   val description = "help : print all available commands"
   type ReturnType = Unit
-  def validateArguments(args: List[String]): Either[String, ReturnType] = Right(())
+  def validateArguments(args: List[String]): Either[String, ReturnType] =
+    Right(
+      ()
+    )
 
 case object Exit extends Command:
   val stringRepresentation = "exit"
   val description = "exit : exit the program"
   type ReturnType = Unit
-  def validateArguments(args: List[String]): Either[String, ReturnType] = Right(())
+  def validateArguments(args: List[String]): Either[String, ReturnType] =
+    Right(
+      ()
+    )
 
 case object Inspect extends Command:
   val stringRepresentation = "inspect"
@@ -31,27 +37,37 @@ case object Inspect extends Command:
   type ReturnType = Int
   def validateArguments(args: List[String]): Either[String, Int] =
     if args.length != 1 then
-      Left(s">> ${Inspect.stringRepresentation} requires exactly one integer argument")
+      Left(
+        s">> ${Inspect.stringRepresentation} requires exactly one integer argument"
+      )
     else
       args.head.toIntOption match
-        case None => Left(s">> ${Inspect.stringRepresentation} requires an integer as argument")
+        case None =>
+          Left(
+            s">> ${Inspect.stringRepresentation} requires an integer as argument"
+          )
         case Some(n) => Right(n)
 
 case object Prove extends Command:
   val stringRepresentation = "select"
-  val description: String = s"$stringRepresentation [n] : select system n for termination proving"
+  val description: String =
+    s"$stringRepresentation [n] : select system n for termination proving"
   type ReturnType = Int
   def validateArguments(args: List[String]): Either[String, Int] =
     if args.length != 1 then
       Left(s">> ${stringRepresentation} requires exactly one integer argument")
     else
       args.head.toIntOption match
-        case None => Left(s">> ${Inspect.stringRepresentation} requires an integer as argument")
+        case None =>
+          Left(
+            s">> ${Inspect.stringRepresentation} requires an integer as argument"
+          )
         case Some(n) => Right(n)
 
 case object Back extends Command:
   val stringRepresentation = "back"
-  val description: String = s"$stringRepresentation : return to system selection mode"
+  val description: String =
+    s"$stringRepresentation : return to system selection mode"
   type ReturnType = Unit
   def validateArguments(args: List[String]): Either[String, Unit] = Right(())
 
@@ -66,14 +82,19 @@ case object Use extends Command:
     |       - tile 3 with weight 4 (counting homomorphisms), and
     |       - tile 5 with weight 9 (counting regular monos)""".stripMargin
   type ReturnType = Set[(Int, Int, CountingClass)]
-  def validateArguments(args: List[String]): Either[String, Set[(Int, Int, CountingClass)]] = 
-    if args.length < 3 && args.length % 3 != 0 
-    then Left(s">> $stringRepresentation requires a positive multiple of 3 arguments")
-    else 
-      def peel(toProcess: List[String]): Set[(Int, Int, CountingClass)] = 
+  def validateArguments(
+      args: List[String]
+  ): Either[String, Set[(Int, Int, CountingClass)]] =
+    if args.length < 3 && args.length % 3 != 0
+    then
+      Left(
+        s">> $stringRepresentation requires a positive multiple of 3 arguments"
+      )
+    else
+      def peel(toProcess: List[String]): Set[(Int, Int, CountingClass)] =
         if toProcess.isEmpty
         then Set()
-        else 
+        else
           val tileNr = toProcess(0).trim().toInt
           val weight = toProcess(1).trim().toInt
           val slideClass = CountingClass.fromString(toProcess(2).trim())
@@ -81,7 +102,9 @@ case object Use extends Command:
 
       Try(peel(args)) match
         case Failure(exception) =>
-          Left(s">> $stringRepresentation was given incorrect input: $exception")
+          Left(
+            s">> $stringRepresentation was given incorrect input: $exception"
+          )
         case Success(parsed) =>
           if parsed.exists(tup => tup(1) < 1)
           then Left(">> weights must be positive")
@@ -89,7 +112,8 @@ case object Use extends Command:
 
 case object Systems extends Command:
   val stringRepresentation = "systems"
-  val description: String = s"$stringRepresentation : list the available systems"
+  val description: String =
+    s"$stringRepresentation : list the available systems"
   type ReturnType = Unit
   def validateArguments(args: List[String]): Either[String, Unit] = Right(())
 
@@ -98,4 +122,3 @@ case object Tiles extends Command:
   val description: String = s"$stringRepresentation : list the available tiles"
   type ReturnType = Unit
   def validateArguments(args: List[String]): Either[String, Unit] = Right(())
-
