@@ -11,5 +11,6 @@ object FreshSetProducer:
 
   given FreshSetProducer[String] with
     def create(amount: Int, existing: Set[String]): Set[String] =
-      val root = if existing.isEmpty then "" else existing.toList.sortBy(_.length).last
+      val root =
+        if existing.isEmpty then "" else existing.toList.sortBy(_.length).last
       (0 until amount).map(i => root + i.toString).toSet

@@ -2,8 +2,8 @@ package com.pbpoplus.categorytheory
 
 import com.pbpoplus.util._
 
-final case class SetCategory[X]()(implicit freshX: FreshSetProducer[X]) 
-  extends Topos[Set[X], Fn[X, X]]:
+final case class SetCategory[X]()(implicit freshX: FreshSetProducer[X])
+    extends Topos[Set[X], Fn[X, X]]:
 
   def after(g: Fn[X, X], f: Fn[X, X]): Fn[X, X] = g.after(f)
   def domain(f: Fn[X, X]): Set[X] = f.domain
@@ -13,27 +13,31 @@ final case class SetCategory[X]()(implicit freshX: FreshSetProducer[X])
   def isMonic(f: Fn[X, X]): Boolean = f.isInjective
   def isEpic(f: Fn[X, X]): Boolean = f.isSurjective
 
-  def pullback(cospan: Cospan[Fn[X, X]]): Span[Fn[X, X]] = 
+  def pullback(cospan: Cospan[Fn[X, X]]): Span[Fn[X, X]] =
     val (pbLeft, pbRight) = cospan.left.pullbackWith(cospan.right)
     val pbObject = pbLeft.domain
 
     val pbObjectInX = freshX.create(pbObject.size)
     val bijection = pbObjectInX.zip(pbObject).toMap
 
-    val pbLeftt = Fn(pbObjectInX.mapTo(x => pbLeft(bijection(x))), cospan.left.domain)
-    val pbRightt = Fn(pbObjectInX.mapTo(x => pbRight(bijection(x))), cospan.right.domain)
+    val pbLeftt =
+      Fn(pbObjectInX.mapTo(x => pbLeft(bijection(x))), cospan.left.domain)
+    val pbRightt =
+      Fn(pbObjectInX.mapTo(x => pbRight(bijection(x))), cospan.right.domain)
 
     Span(pbLeftt, pbRightt)
 
-  def pushout(span: Span[Fn[X, X]]): Cospan[Fn[X, X]] = 
+  def pushout(span: Span[Fn[X, X]]): Cospan[Fn[X, X]] =
     val (poLeft, poRight) = span.left.pushoutWith(span.right)
     val poObject = poLeft.codomain
 
     val poObjectInX = freshX.create(poObject.size)
     val bijection = poObject.zip(poObjectInX).toMap
 
-    val poLeftt = Fn(span.left.codomain.mapTo(x => bijection(poLeft(x))), poObjectInX)
-    val poRightt = Fn(span.right.codomain.mapTo(x => bijection(poRight(x))), poObjectInX)
+    val poLeftt =
+      Fn(span.left.codomain.mapTo(x => bijection(poLeft(x))), poObjectInX)
+    val poRightt =
+      Fn(span.right.codomain.mapTo(x => bijection(poRight(x))), poObjectInX)
 
     Cospan(poLeftt, poRightt)
 
@@ -41,9 +45,10 @@ final case class SetCategory[X]()(implicit freshX: FreshSetProducer[X])
 
   lazy val terminalObject: Set[X] = freshX.create(1)
 
-  def homSet(from: Set[X], to: Set[X]): Set[Fn[X, X]] = from.functions(to).map(Fn(_, to))
+  def homSet(from: Set[X], to: Set[X]): Set[Fn[X, X]] =
+    from.functions(to).map(Fn(_, to))
 
-  def partialMapClassifierArrow(set: Set[X]): Fn[X, X] = 
+  def partialMapClassifierArrow(set: Set[X]): Fn[X, X] =
     val singletonSet = freshX.create(1, set)
     Fn(set.identityMap, set + singletonSet.head)
 

@@ -9,9 +9,9 @@ object Util:
     val d = new File(dir)
     if !(d.exists && d.isDirectory)
     then Left("invalid directory")
-    else 
+    else
       val resourceFiles: List[File] = d.listFiles.filter(_.isFile).toList
-      val resources: Set[Resource] = resourceFiles.map{file =>
+      val resources: Set[Resource] = resourceFiles.map { file =>
         val name: String = file.toString.split("/").last.split("\\.").head
         val content: String = io.Source.fromFile(file).getLines.mkString("\n")
         Resource(name, content)
@@ -19,13 +19,20 @@ object Util:
 
       Right(resources)
 
-  def printResources(indexToResource: Map[Int, Resource], resourceType: String): Unit = 
+  def printResources(
+      indexToResource: Map[Int, Resource],
+      resourceType: String
+  ): Unit =
     println(s">> The following ${resourceType}s were loaded:")
-    indexToResource.toList.sortBy(_._1).foreach{ case (i, Resource(name, content)) => 
-      println(s"  (${i}) $name")
+    indexToResource.toList.sortBy(_._1).foreach {
+      case (i, Resource(name, content)) =>
+        println(s"  (${i}) $name")
     }
 
-  def loadSystems(dir: String): Either[String, Set[Resource]] = loadResources(dir)
+  def loadSystems(dir: String): Either[String, Set[Resource]] =
+    loadResources(
+      dir
+    )
   def loadTiles(dir: String): Either[String, Set[Resource]] = loadResources(dir)
 
   def printAvailableCommands(availableCommands: Set[Command]): Unit =
@@ -37,18 +44,19 @@ object Util:
     Thread.sleep(1000)
     val input: Array[String] = scala.io.StdIn.readLine().split(" ")
     val commandInput = input.head.trim()
-    if commandInput.isEmpty 
+    if commandInput.isEmpty
     then promptCommand(availableCommands)
-    else 
-      val command: Option[Command] = 
+    else
+      val command: Option[Command] =
         availableCommands.find(_.stringRepresentation == commandInput)
-      command match 
-        case None => 
+      command match
+        case None =>
           println(s"$commandInput is not a valid command.")
           promptCommand(availableCommands)
-        case Some(cmd) => 
+        case Some(cmd) =>
           val arguments = input.tail.toList
-          val result: Either[String, cmd.ReturnType] = cmd.validateArguments(arguments)
+          val result: Either[String, cmd.ReturnType] =
+            cmd.validateArguments(arguments)
           result match
             case Right(parsed) => (cmd, parsed)
             case Left(errorMsg) =>
