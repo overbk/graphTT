@@ -84,7 +84,7 @@ case object Use extends Command:
           Left(s">> $stringRepresentation was given incorrect input: $exception")
         case Success(parsed) =>
           if parsed.exists(tup => tup(1) < 1)
-          then Left(s">> weights must be positive")
+          then Left(">> weights must be positive")
           else Right(parsed)
 
 case object Systems extends Command:

@@ -97,7 +97,7 @@ def startREPL[O, A, C <: TerminationCategory[O, A]](
     ruleNameToStringRep: Map[String, String]
   ): Unit =
     println(s">> The system consists of ${system.size} rule${if system.size == 1 then "" else "s"}.")
-    println(s">> The system is as follows:\n")
+    println(">> The system is as follows:\n")
     ruleNameToStringRep.foreach{ case (ruleName, rule) => println(s"=== $ruleName ===\n$rule")}
     println()
     println(">> Type 'help' to view the available commands.")
@@ -155,12 +155,12 @@ def startREPL[O, A, C <: TerminationCategory[O, A]](
               println()
               systemSelectionMode()
             else if pruned == system then
-              println(s">> No rules were eliminated. Try another set of weighted tiles.")
+              println(">> No rules were eliminated. Try another set of weighted tiles.")
               terminationPrompt()
             else 
-              println(s">> You have eliminated some rules in this iteration.")
+              println(">> You have eliminated some rules in this iteration.")
               println(s">> ${pruned.size} rule(s) remain.")
-              println(s">> Try another set of weighted tiles.")
+              println(">> Try another set of weighted tiles.")
               println()
               val remainingRuleNames = pruned.keySet
               val updatedSourceString = 
