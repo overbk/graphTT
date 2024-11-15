@@ -5,13 +5,13 @@
   ],
   "packageRules": [
     {
-      "packageNames": ["scala-library"],
-      "groupName": "Scala Updates",
-      "updateTypes": ["minor", "patch", "major"]
-    },
-    {
       "updateTypes": ["minor", "patch"],
       "groupName": "Minor Dependency Updates"
+    },
+    {
+      "packageNames": ["org.scala-lang:**"],
+      "groupName": "Scala Updates",
+      "updateTypes": ["minor", "patch", "major"]
     }
   ]
 }
