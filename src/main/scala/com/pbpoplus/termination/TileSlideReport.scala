@@ -1,7 +1,6 @@
 package com.pbpoplus.termination
 
 import com.pbpoplus.rewriting.PbpoPlusRule
-import com.pbpoplus.labeledgraph.LabeledGraph
 
 final case class TileSlideReport[O, A](
   tile: O,
@@ -11,7 +10,7 @@ final case class TileSlideReport[O, A](
   validTilingsNonisoInR: Set[A], // pb(tile, t_R) in class and pb(t_R, tile) is noniso
   slideOptions: Set[Set[A]] // tiles that are slid may have multiple candidates into L'. slideOptions contains all sets of choices
 ):
-  override def toString =
+  override def toString: String =
     s"""
     |# morphisms into R':           ${tilingsIntoR1.size}
     |# of which valid:              ${validTilingsIsoInR.size + validTilingsNonisoInR.size}

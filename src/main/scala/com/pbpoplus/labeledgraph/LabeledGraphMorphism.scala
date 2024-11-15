@@ -1,6 +1,7 @@
 package com.pbpoplus.labeledgraph
 
-import com.pbpoplus.util.{mapTo, after, isSurjectiveOn}
+import com.pbpoplus.util.after
+import com.pbpoplus.util.isSurjectiveOn
 
 object LabeledGraphMorphism:
   def isValid[V1, E1, V2, E2, LV, LE](

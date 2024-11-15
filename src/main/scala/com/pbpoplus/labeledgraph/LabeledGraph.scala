@@ -1,7 +1,7 @@
 package com.pbpoplus.labeledgraph
 
-import com.pbpoplus.util._
 import cats.syntax.all._
+import com.pbpoplus.util._
 
 object LabeledGraph:
   def empty[T]: LabeledGraph[T, T, T, T] = 

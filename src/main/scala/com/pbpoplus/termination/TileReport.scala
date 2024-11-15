@@ -8,12 +8,12 @@ final case class TileReport[O, A](
 ):
   import tileInfo._
 
-  val counting = countingClass match
+  val counting: String = countingClass match
     case CountingClass.RegularMono => "REGULAR MONOS only"
     case CountingClass.Mono => "MONOS only"
     case CountingClass.Homomorphism => "all HOMOMORPHISMS"
   
-  override def toString = 
+  override def toString: String = 
     s"""
     |~~~ Tile $name with weight $weight, and counting $counting
     |  $stringRepresentation

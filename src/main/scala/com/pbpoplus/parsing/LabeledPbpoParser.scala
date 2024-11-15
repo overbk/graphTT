@@ -1,9 +1,10 @@
 package com.pbpoplus.parsing
 
-import com.pbpoplus.rewriting.{PbpoPlusRule, LabeledGraphPbpoPlusRule}
-import com.pbpoplus.labeledgraph.{LabeledGraph, LabeledGraphMorphism}
-import parsing.LabeledRuleParser
 import com.pbpoplus.labeledgraph.LabeledGraphCategory
+import com.pbpoplus.labeledgraph.LabeledGraphMorphism
+import com.pbpoplus.rewriting.LabeledGraphPbpoPlusRule
+import com.pbpoplus.rewriting.PbpoPlusRule
+import parsing.LabeledRuleParser
 
 class LabeledPbpoParser extends LabeledRuleParser[LabeledGraphPbpoPlusRule[String]]:
   lazy val graphNames: Set[String] = Set("L", "L'", "K", "K'", "R")

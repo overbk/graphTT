@@ -1,14 +1,13 @@
 package com.pbpoplus.rewriting
 
-import scala.annotation.targetName
-
-import com.pbpoplus.categorytheory.{Category, Quasitopos, Span}
-import com.pbpoplus.rewriting.PbpoPlusRule
+import com.pbpoplus.categorytheory.Category
+import com.pbpoplus.categorytheory.Quasitopos
+import com.pbpoplus.categorytheory.Span
 
 final case class DpoRule[O, A](l: A, r: A)(implicit category: Category[O, A])
   extends RewriteRule[O, A]:
   import category._
-  val L = codomain(l)
+  val L: O = codomain(l)
   val K: O = domain(l)
   val R: O = codomain(r)
 

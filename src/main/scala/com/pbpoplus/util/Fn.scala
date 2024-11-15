@@ -1,6 +1,6 @@
 package com.pbpoplus.util
 
-import com.pbpoplus.categorytheory.{Span, Cospan}
+
 
 final case class Fn[X, Y](function: Map[X, Y], codomain: Set[Y]):
   lazy val domain = function.keySet
@@ -10,7 +10,7 @@ final case class Fn[X, Y](function: Map[X, Y], codomain: Set[Y]):
 
   override def toString: String = function.toString
 
-  def after[Z](that: Fn[Z, X]) =
+  def after[Z](that: Fn[Z, X]): Fn[Z, Y] =
     require(domain == that.codomain)
     Fn(function.after(that.function), codomain)
   

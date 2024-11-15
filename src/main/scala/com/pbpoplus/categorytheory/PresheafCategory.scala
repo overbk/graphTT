@@ -1,7 +1,9 @@
 package com.pbpoplus.categorytheory
 
-import com.pbpoplus.util.{Fn, mapTo, FreshSetProducer, restrictDomainTo}
-import scala.annotation.targetName
+import com.pbpoplus.util.Fn
+import com.pbpoplus.util.FreshSetProducer
+import com.pbpoplus.util.mapTo
+import com.pbpoplus.util.restrictDomainTo
 
 abstract class PresheafCategory[O, A, X]
   (indexCategory: FiniteCategory[O, A])(implicit freshX: FreshSetProducer[X]) 
