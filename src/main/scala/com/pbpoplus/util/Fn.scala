@@ -20,7 +20,7 @@ final case class Fn[X, Y](function: Map[X, Y], codomain: Set[Y]):
   def pullbackWith[Z](g: Fn[Z, Y]): (Fn[(X, Z), X], Fn[(X, Z), Z]) = 
     require(codomain == g.codomain)
 
-    val product: Set[(X, Z)] = domain cross g.domain
+    val product: Set[(X, Z)] = domain.cross(g.domain)
     val pullbackObject = product.filter((x, y) => function(x) == g.function(y))
 
     val left = pullbackObject.mapTo(_._1)
