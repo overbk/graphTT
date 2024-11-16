@@ -1,8 +1,10 @@
 ## graphTT
 
-This repository contains a Scala implementation of a termination method for PBPO+ graph transformation systems, described in a recent research paper:
+This repository contains a Scala implementation of a termination method for PBPO+ graph transformation systems, described in the research paper:
 
-R. Overbeek & J. Endrullis. Termination of Graph Transformation Systems Using Weighted Subgraph Counting. arXiv, 2023. [url](https://arxiv.org/abs/2303.07812)
+R. Overbeek & J. Endrullis. Termination of Graph Transformation Systems Using Weighted Subgraph Counting. Logical Methods in Computer Science, 20(4), 2024. [url](https://lmcs.episciences.org/14724)
+
+_A historical snapshot of the precise repository described in the journal publication is available on [Zenodo](https://zenodo.org/records/13842805) or [here on GitHub](https://github.com/overbk/graphTT/releases/tag/journal-artefact)._
 
 ### Context
 
