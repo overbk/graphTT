@@ -12,7 +12,7 @@ object Termination:
       rho: PbpoPlusRule[O, A],
       countingClass: CountingClass
   )(implicit category: TerminationCategory[O, A]): Set[A] =
-    import category.{codomain, pullback, rightInversesFor, ArrowOps}
+    import category.{codomain, pullback, rightInversesFor}
     require(codomain(tiling) == rho.R1.get)
 
     /** L1 <-l1- K1 -r1-> R1 ^ ^ \| | \| PB tiling \| | X -----> T
@@ -80,7 +80,7 @@ object Termination:
       tileInfo: WeightedTileInfo[O, A],
       rho: PbpoPlusRule[O, A]
   )(implicit category: TerminationCategory[O, A]): TileReport[O, A] =
-    import category.{homSet, ArrowOps, isMonic}
+    import category.{homSet, isMonic}
     import tileInfo._
 
     val inClass = countingClass.predicate

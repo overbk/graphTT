@@ -50,7 +50,7 @@ abstract class PresheafCategory[O, A, X](indexCategory: FiniteCategory[O, A])(
   override def pushout(
       span: Span[NaturalTransformation[O, A, Set[X], Fn[X, X]]]
   ): Cospan[NaturalTransformation[O, A, Set[X], Fn[X, X]]] =
-    /** A -- etaRight --> B \| | etaLeft PO etaRight1 \| | V V C -- etaLeft1 -->
+    /** A -- etaRight --> B \|| etaLeft PO etaRight1 \| | V V C -- etaLeft1 -->
       * F
       */
 

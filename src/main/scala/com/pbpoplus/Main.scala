@@ -3,6 +3,8 @@ package com.pbpoplus
 import com.pbpoplus.termination.CountingClass
 import com.pbpoplus.util.FreshSetProducer
 
+import scala.annotation.tailrec
+
 import labeledgraph.LabeledGraphCategory
 import rewriting.PbpoPlusRule
 import categorytheory.TerminationCategory
@@ -13,7 +15,7 @@ import repl.Util._
 import parsing.Util.parse
 import parsing.LabeledPbpoParser
 
-@main def main: Unit =
+@main def main(): Unit =
   val labeledGraphCategory =
     LabeledGraphCategory[String, String, String, String]()
   val p = new LabeledPbpoParser()
@@ -58,6 +60,7 @@ def startREPL[O, A, C <: TerminationCategory[O, A]](
     println(">> You are in system selection mode.")
     println(">> Type 'help' to view the available commands.")
     systemSelectionPrompt()
+    @tailrec
     def systemSelectionPrompt(): Unit =
       val (command, parsed) = promptCommand(systemSelectionLoopCommands)
       command match
@@ -112,6 +115,7 @@ def startREPL[O, A, C <: TerminationCategory[O, A]](
     println(">> Type 'help' to view the available commands.")
 
     terminationPrompt()
+    @tailrec
     def terminationPrompt(): Unit =
       val (command, parsed) = promptCommand(terminationLoopCommands)
       command match

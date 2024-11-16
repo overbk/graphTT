@@ -37,8 +37,8 @@ final case class LabeledGraph[V, E, LV, LE](
 
   private type LGraph = LabeledGraph[V, E, LV, LE]
 
-  val vertexLabels = lV.values.toSet
-  val edgeLabels = lE.values.toSet
+  val vertexLabels: Set[LV] = lV.values.toSet
+  val edgeLabels: Set[LE] = lE.values.toSet
   val nrOfVertices: Int = vertices.size
   val nrOfEdges: Int = edges.size
   lazy val isEmpty: Boolean = this == LabeledGraph.empty

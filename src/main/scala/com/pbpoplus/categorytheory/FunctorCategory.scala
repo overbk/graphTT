@@ -8,9 +8,13 @@ trait FunctorCategory[O1, A1, O2, A2](
       NaturalTransformation[O1, A1, O2, A2]
     ]:
 
-  def domain(alpha: NaturalTransformation[O1, A1, O2, A2]) = alpha.from
+  def domain(
+      alpha: NaturalTransformation[O1, A1, O2, A2]
+  ): Functor[O1, A1, O2, A2] = alpha.from
 
-  def codomain(alpha: NaturalTransformation[O1, A1, O2, A2]) = alpha.to
+  def codomain(
+      alpha: NaturalTransformation[O1, A1, O2, A2]
+  ): Functor[O1, A1, O2, A2] = alpha.to
 
   def identityArrow(
       f: Functor[O1, A1, O2, A2]

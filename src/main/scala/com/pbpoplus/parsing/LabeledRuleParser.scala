@@ -29,7 +29,7 @@ trait LabeledRuleParser[T <: RewriteRule[LGraph, LGraphMorphism]]
   private def ruleName: Parser[String] = identifier
 
   def rule: Parser[T] =
-    repN(nrOfGraphs, namedGraph) ^^ { case namedGraphs =>
+    repN(nrOfGraphs, namedGraph) ^^ { namedGraphs =>
       val nameToGraph = namedGraphs.map { case name ~ graph =>
         (name, graph)
       }.toMap
@@ -40,8 +40,8 @@ trait LabeledRuleParser[T <: RewriteRule[LGraph, LGraphMorphism]]
         "encountered an unexpected number of graphs"
       )
 
-      val vertexLabels = graphs.map(_.vertexLabels).flatten.toSet
-      val edgeLabels = graphs.map(_.edgeLabels).flatten.toSet
+      val vertexLabels = graphs.flatMap(_.vertexLabels).toSet
+      val edgeLabels = graphs.flatMap(_.edgeLabels).toSet
 
       val nameToMorphism =
         def createMorphism[LV, LE](
