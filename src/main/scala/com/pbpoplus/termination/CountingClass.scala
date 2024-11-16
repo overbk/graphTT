@@ -18,7 +18,7 @@ enum CountingClass:
     this match
       case RegularMono  => category.isRegularMonic
       case Mono         => category.isMonic
-      case Homomorphism => { (_: A) => true }
+      case Homomorphism => (_: A) => true
 
   def secondFactor[A](implicit category: TerminationCategory[?, A]): A => A =
     this match

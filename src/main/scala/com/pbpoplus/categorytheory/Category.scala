@@ -7,9 +7,7 @@ trait Category[O, A]:
   def after(g: A, f: A): A
   def homSet(from: O, to: O): Set[A]
 
-  implicit class ArrowOps(g: A):
-    infix def o(f: A): A = after(g, f)
-  end ArrowOps
+  extension (g: A) infix def o(f: A): A = after(g, f)
 
   def areCompatible(g: A, f: A): Boolean = domain(g) == codomain(f)
   def areOpposite(f: A, g: A): Boolean =
@@ -37,20 +35,20 @@ trait Category[O, A]:
 
   def isMonicFor(f: A, arrows: Set[A]): Boolean =
     require(arrows.forall(areCompatible(f, _)))
-    arrows.size == arrows.map((f o _)).size
+    arrows.size == arrows.map(f o _).size
 
   ///////////////////////////////////////////////////////////////////////////
   // Spans and cospans.
   ///////////////////////////////////////////////////////////////////////////
 
   extension (span: Span[A])
-    def isValid = domain(span.left) == domain(span.right)
-    def root = domain(span.left)
+    def isValid: Boolean = domain(span.left) == domain(span.right)
+    def root: O = domain(span.left)
   end extension
 
   extension (cospan: Cospan[A])
-    def isValid = codomain(cospan.left) == codomain(cospan.right)
-    def sink = codomain(cospan.left)
+    def isValid: Boolean = codomain(cospan.left) == codomain(cospan.right)
+    def sink: O = codomain(cospan.left)
   end extension
 
   ///////////////////////////////////////////////////////////////////////////

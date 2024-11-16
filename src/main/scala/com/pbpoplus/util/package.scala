@@ -28,9 +28,10 @@ end extension
 extension [A, B](m: Map[A, B])
   def after[C](n: Map[C, A]): Map[C, B] = n.view.mapValues(m).toMap
   def isInjective: Boolean = m.keys.toSet.size == m.values.toSet.size
-  def isSurjectiveOn(s: Set[B]) = m.values.toSet == s
-  def restrictDomainTo(s: Set[A]) = m.filter((b, _) => s.contains(b))
-  def restrictCodomainTo(s: Set[B]) = m.filter((_, c) => s.contains(c))
+  def isSurjectiveOn(s: Set[B]): Boolean = m.values.toSet == s
+  def restrictDomainTo(s: Set[A]): Map[A, B] = m.filter((b, _) => s.contains(b))
+  def restrictCodomainTo(s: Set[B]): Map[A, B] =
+    m.filter((_, c) => s.contains(c))
   def rename[X, Y](renameKey: A => X, renameValue: B => Y): Map[X, Y] =
     m.map(renameKey *** renameValue)
 

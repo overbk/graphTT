@@ -1,6 +1,4 @@
-package rewriting
-
-import com.pbpoplus.rewriting.PbpoPlusRule
+package com.pbpoplus.rewriting
 
 final case class PbpoPlusSystem[O, A](
     name: String,

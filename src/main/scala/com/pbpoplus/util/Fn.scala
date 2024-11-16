@@ -1,8 +1,8 @@
 package com.pbpoplus.util
 
 final case class Fn[X, Y](function: Map[X, Y], codomain: Set[Y]):
-  lazy val domain = function.keySet
-  lazy val image = function.values.toSet
+  lazy val domain: Set[X] = function.keySet
+  lazy val image: Set[Y] = function.values.toSet
 
   def apply(x: X): Y = function(x)
 

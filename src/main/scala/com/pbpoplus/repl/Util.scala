@@ -1,6 +1,7 @@
 package com.pbpoplus.repl
 
 import java.io.File
+import scala.annotation.tailrec
 
 object Util:
   private val inputPrefix = "graphTT>"
@@ -13,7 +14,11 @@ object Util:
       val resourceFiles: List[File] = d.listFiles.filter(_.isFile).toList
       val resources: Set[Resource] = resourceFiles.map { file =>
         val name: String = file.toString.split("/").last.split("\\.").head
-        val content: String = io.Source.fromFile(file).getLines.mkString("\n")
+        val content: String =
+          val buffered = io.Source.fromFile(file)
+          val content = buffered.getLines.mkString("\n")
+          buffered.close()
+          content
         Resource(name, content)
       }.toSet
 
@@ -39,6 +44,7 @@ object Util:
     println(">> Available commands:")
     availableCommands.foreach(cmd => println(s"  ${cmd.description}"))
 
+  @tailrec
   def promptCommand(availableCommands: Set[Command]): (Command, Any) =
     print(s"$inputPrefix ")
     Thread.sleep(1000)

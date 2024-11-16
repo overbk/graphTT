@@ -1,4 +1,7 @@
 package com.pbpoplus.util
 
-implicit class extendedBoolean(a: Boolean):
+import scala.annotation.targetName
+
+extension (a: Boolean)
+  @targetName("implies")
   infix def ==>(b: => Boolean): Boolean = !a || b
