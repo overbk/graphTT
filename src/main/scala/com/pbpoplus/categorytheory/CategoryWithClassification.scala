@@ -15,10 +15,14 @@ trait CategoryWithClassification[O, A]
   def partialMapClassifier(o: O): O = codomain(partialMapClassifierArrow(o))
 
   def partialMapClassify(span: Span[A]): A =
-    /** X ------ f -----> A \| | subobject PB eta_f =
-      * partialMapClassifierArrow(A) \| | V V B --- ! --->
-      * partialMapClassifier(A)
-      */
+    /*
+     *       X ------ f -----> A
+     *       |                 |
+     *    subobject   PB     eta_f = partialMapClassifierArrow(A)
+     *       |                 |
+     *       V                 V
+     *       B --- ! ---> partialMapClassifier(A)
+     */
     val subobject = span.left
     require(isRegularMonic(subobject))
 

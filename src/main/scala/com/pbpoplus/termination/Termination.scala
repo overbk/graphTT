@@ -15,8 +15,14 @@ object Termination:
     import category.{codomain, pullback, rightInversesFor}
     require(codomain(tiling) == rho.R1.get)
 
-    /** L1 <-l1- K1 -r1-> R1 ^ ^ \| | \| PB tiling \| | X -----> T
-      */
+    /*
+     * L1 <-l1- K1 -r1-> R1
+     *          ^        ^
+     *          |        |
+     *          |   PB  tiling
+     *          |        |
+     *          X -----> T
+     */
 
     val `K1 <- X -> T` = pullback(Cospan(rho.r1.get, tiling))
     val `K1 <- X`: A = `K1 <- X -> T`.left
@@ -52,10 +58,15 @@ object Termination:
 
     val inClass = countingClass.predicate
 
-    /** for all tilings t in Hom(T, R1):
-      *
-      * tile <--iso?--- X \| | t PB in class? \| | V V R1 <---tR----- R
-      */
+    /*  for all tilings t in Hom(T, R1):
+     *
+     *  tile <--iso?--- X
+     *   |              |
+     *   t     PB   in class?
+     *   |              |
+     *   V              V
+     *   R1 <---tR----- R
+     */
 
     val `Hom(tile, R1)`: Set[A] = homSet(tile, rho.R1.get)
     val tilingToPb: Map[A, Span[A]] =
